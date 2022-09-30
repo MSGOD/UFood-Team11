@@ -129,7 +129,7 @@ const Home = () => {
                                 }}
                             />
                         </div>
-
+                        <div className='title-dropdown'>Select genre(s) :</div>
                         <div className='dropdown'>
                             <MultipleSelectPlaceholder/>
                         </div>

@@ -80,7 +80,7 @@ const getFilteredGenres = () => {
 
   return (
     <div>
-      <FormControl sx={{ mx: 1.6, width: 0.9, mt: 3, display: 'flex' }}>
+      <FormControl sx={{ mx: 1.6, width: 0.9, mt: 1.5, mb: 2, display: 'flex' }}>
         <Select
           multiple
           displayEmpty
