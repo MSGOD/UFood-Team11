@@ -1,0 +1,2 @@
+first : npm start
+second : npx json-server --watch Data.json --port 3001
