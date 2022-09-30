@@ -8,7 +8,6 @@ import Slider from '@mui/material/Slider';
 import {MultipleSelectPlaceholder, getFilteredGenres} from '../components/Dropdown';
 import { useParams } from 'react-router-dom';
 
-//Test 2022
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
 
