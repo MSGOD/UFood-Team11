@@ -6,12 +6,14 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Slider from '@mui/material/Slider';
 import {MultipleSelectPlaceholder, getFilteredGenres} from '../components/Dropdown';
+import { useParams } from 'react-router-dom';
 
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
 
 
 const Restaurant = () => {
+    const { id } = useParams()
     const [searchTerm, setSearchTerm] = useState("");
     const [restos, setRestos] = useState([]);
     const [value, setValue] = useState([1, 5]);
