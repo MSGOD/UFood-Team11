@@ -16,14 +16,37 @@ const Home = () => {
     const [restos, setRestos] = useState([]);
     const [value, setValue] = useState([1, 5]);
 
+    let FilteredGenres = getFilteredGenres();
 
     const searchRestos = async (name) => {
-        const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=155`);
+        const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=150`);
         const data = await response.json();
 
+        console.log(data.items);
         setRestos(data.items);
     };
 
+    const searchByFilters = async (name, price=[], genres=[]) => {
+        let price_range = [];
+        let max = price[1];
+        let min = price[0];
+        for (let i = min; i<=max; i++){
+            price_range.push(i)
+        }
+
+        if (genres?.length > 0){
+            const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&genres=${genres}&price_range=${price_range}&limit=155`);
+            const data = await response.json();
+            console.log(data.items);
+            setRestos(data.items);
+        } else {
+            const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&price_range=${price_range}&limit=155`);
+            const data = await response.json();
+            console.log(data.items);
+            setRestos(data.items);
+        }
+        console.log({genres});
+    };
 
     let lstGenres = [];
     let uniqueGenres = [];
@@ -39,7 +62,7 @@ const Home = () => {
             if (!uniqueGenres.includes(c)) {
                 uniqueGenres.push(c);
             }
-        });
+        })
       }, []);
 
       
@@ -71,8 +94,6 @@ const Home = () => {
         },
       ];
 
-
-    let filteredGenres = getFilteredGenres();
 
     return(
         <>
@@ -133,6 +154,9 @@ const Home = () => {
                         <div className='dropdown'>
                             <MultipleSelectPlaceholder/>
                         </div>
+                        <button className='btnFiltrer' onClick={() => {
+                            FilteredGenres = getFilteredGenres();
+                            searchByFilters(searchTerm, value, FilteredGenres.FilteredGenres)}}>Apply filter</button>
                     </div>
                     <div className="search-result">
                         <div className="ResultTitle"><h2> Results :</h2></div>
