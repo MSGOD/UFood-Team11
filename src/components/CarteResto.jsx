@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DistanceCalculator from 'distance-calculator-js';
+import useGeoLocation from './useGeoLocation';
 
-const CarteResto = ({ restau: { name, rating, price_range, id } }) => {
+const CarteResto = ({ restau: { name, rating, price_range, id, location } }) => {
 
 
     let cout = ""
@@ -35,10 +37,15 @@ const CarteResto = ({ restau: { name, rating, price_range, id } }) => {
     const round10 = (value, exp) => decimalAdjust("round", value, exp);
     const link = `/Restaurant/${id}`
 
+    const loc = { lat: location.coordinates[1], long : location.coordinates[0]}
+    const userLoc = useGeoLocation();
+    const loc2 = { lat: userLoc.coordinates.lat, long : userLoc.coordinates.lng}
+    const dist = DistanceCalculator.calculate(loc, loc2, 'km');
+
   return (
     <div className="resto-result">
       <Link to={`/Restaurant/${id}`} style={{ margin: 10, color: 'inherit', textDecoration: 'inherit'}}> 
-          <span className="spansers">{name}    | &#9733;{round10(rating, -1)}/5     |     {cout}     |      1Km away</span>
+          <span className="spansers">{name}    | &#9733;{round10(rating, -1)}/5     |     {cout}     |      {dist}Km</span>
       </Link>
     </div>
   );

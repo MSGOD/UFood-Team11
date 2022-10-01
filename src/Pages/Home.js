@@ -5,11 +5,12 @@ import '../App.css';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Slider from '@mui/material/Slider';
-import {MultipleSelectPlaceholder, getFilteredGenres} from '../components/Dropdown';
+import { MultipleSelectPlaceholder, getFilteredGenres } from '../components/Dropdown';
 import { Link } from 'react-router-dom';
+import { MapContainer, TileLayer, useMap, Marker, Popup, getLeafletElement } from 'react-leaflet';
 
 
-const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
+const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure";
 
 
 const Home = () => {
@@ -23,30 +24,26 @@ const Home = () => {
         const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=150`);
         const data = await response.json();
 
-        console.log(data.items);
         setRestos(data.items);
     };
 
-    const searchByFilters = async (name, price=[], genres=[]) => {
+    const searchByFilters = async (name, price = [], genres = []) => {
         let price_range = [];
         let max = price[1];
         let min = price[0];
-        for (let i = min; i<=max; i++){
+        for (let i = min; i <= max; i++) {
             price_range.push(i)
         }
 
-        if (genres?.length > 0){
+        if (genres?.length > 0) {
             const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&genres=${genres}&price_range=${price_range}&limit=155`);
             const data = await response.json();
-            console.log(data.items);
             setRestos(data.items);
         } else {
             const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&price_range=${price_range}&limit=155`);
             const data = await response.json();
-            console.log(data.items);
             setRestos(data.items);
         }
-        console.log({genres});
     };
 
     let lstGenres = [];
@@ -54,19 +51,21 @@ const Home = () => {
 
     useEffect(() => {
         searchRestos("");
-        {restos.map((resto) => (
-            resto.genres.map((genre) => (
-                lstGenres.push(genre)
+        {
+            restos.map((resto) => (
+                resto.genres.map((genre) => (
+                    lstGenres.push(genre)
+                ))
             ))
-        ))}
+        }
         lstGenres.forEach((c) => {
             if (!uniqueGenres.includes(c)) {
                 uniqueGenres.push(c);
             }
         })
-      }, []);
+    }, []);
 
-      
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -74,29 +73,30 @@ const Home = () => {
 
     const marks = [
         {
-          value: 1,
-          label: '$',
+            value: 1,
+            label: '$',
         },
         {
-          value: 2,
-          label: '$$',
+            value: 2,
+            label: '$$',
         },
         {
-          value: 3,
-          label: '$$$',
+            value: 3,
+            label: '$$$',
         },
         {
-          value: 4,
-          label: '$$$$',
+            value: 4,
+            label: '$$$$',
         },
         {
-          value: 5,
-          label: '$$$$$',
+            value: 5,
+            label: '$$$$$',
         },
-      ];
+    ];
 
 
-    return(
+
+    return (
         <>
             <div className="EnTete">
 
@@ -106,7 +106,7 @@ const Home = () => {
 
                 <div className='Reste'>
 
-                    <input type="checkbox" id="checkbox"/>
+                    <input type="checkbox" id="checkbox" />
                     <label for="checkbox" id="icon">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmLns="http://www.w3.org/2000/svg"><path stroke-Linejoin="round" strokeLinecap="round" stroke-width="2" d="M4 6h12M4 12h16M4 18h16"></path></svg>
                     </label>
@@ -114,7 +114,7 @@ const Home = () => {
                     <ul>
                         <li><a href="#" className="active">Home</a></li>
                         <li>
-                            <Link to="/User" style={{ margin: 10, textDecoration: 'inherit'}}>
+                            <Link to="/User" style={{ margin: 10, textDecoration: 'inherit' }}>
                                 Username
                             </Link>
                         </li>
@@ -124,15 +124,15 @@ const Home = () => {
 
             <div className="Page">
                 <div className="search">
-                    <input 
+                    <input
                         placeholder="Search for a restaurant"
                         value={searchTerm}
-                        onChange={(e) => {setSearchTerm(e.target.value)}}
+                        onChange={(e) => { setSearchTerm(e.target.value) }}
                     />
-                    <img 
-                        src = {SearchIcon}
-                        alt = "Search"
-                        onClick={() => {searchRestos(searchTerm)}}
+                    <img
+                        src={SearchIcon}
+                        alt="Search"
+                        onClick={() => { searchRestos(searchTerm) }}
                     />
                 </div>
 
@@ -157,16 +157,17 @@ const Home = () => {
                         </div>
                         <div className='title-dropdown'>Select genre(s) :</div>
                         <div className='dropdown'>
-                            <MultipleSelectPlaceholder/>
+                            <MultipleSelectPlaceholder />
                         </div>
                         <button className='btnFiltrer' onClick={() => {
                             FilteredGenres = getFilteredGenres();
-                            searchByFilters(searchTerm, value, FilteredGenres.FilteredGenres)}}>Apply filter</button>
+                            searchByFilters(searchTerm, value, FilteredGenres.FilteredGenres)
+                        }}>Apply filter</button>
                     </div>
                     <div className="search-result">
                         <div className="ResultTitle"><h2> Results :</h2></div>
                         {restos?.length > 0 ? (
-                            <SimpleBar style={{ maxHeight: 595}}>
+                            <SimpleBar style={{ maxHeight: 595 }}>
                                 {restos.map((resto) => (
                                     <CarteResto restau={resto} />
                                 ))}
@@ -177,7 +178,24 @@ const Home = () => {
                             </div>
                         )}
                     </div>
+
+                    <div id='mapH'>
+                        <MapContainer center={[46.792991, -71.249422]} zoom={11} scrollWheelZoom={true}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+
+                            {restos.map(resto => (
+                                <Marker
+                                    key={resto.id}
+                                    position={[resto.location.coordinates[1], resto.location.coordinates[0]]}>
+                                </Marker>
+                            ))}
+                        </MapContainer>
+                    </div>
                 </div>
+
             </div>
         </>
     )
