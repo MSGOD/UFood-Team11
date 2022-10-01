@@ -6,6 +6,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Slider from '@mui/material/Slider';
 import {MultipleSelectPlaceholder, getFilteredGenres} from '../components/Dropdown';
+import { Link } from 'react-router-dom';
 
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
@@ -112,7 +113,11 @@ const Home = () => {
 
                     <ul>
                         <li><a href="#" className="active">Home</a></li>
-                        <li><a href="#">Username</a></li>
+                        <li>
+                            <Link to="/User" style={{ margin: 10, textDecoration: 'inherit'}}>
+                                Username
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>
