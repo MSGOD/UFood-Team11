@@ -205,7 +205,7 @@ const Restaurant = () => {
                     </div>
                     
                     <div className=''>
-                        <ul class="nav-resto">
+                        <ul className="nav-resto">
                             <li class="header">{item.Title} TEST</li>
                             <li>Fourchettes : {item.Price} TEST</li>
                             <li>Type : {item.Type}TEST</li>
