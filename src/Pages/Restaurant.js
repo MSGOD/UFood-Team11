@@ -206,7 +206,7 @@ const Restaurant = () => {
                     
                     <div className=''>
                         <ul className="nav-resto">
-                            <li class="header">{item.Title} TEST</li>
+                            <li className="header">{item.Title} TEST</li>
                             <li>Fourchettes : {item.Price} TEST</li>
                             <li>Type : {item.Type}TEST</li>
                             <li>Heures d'ouvertures : {item.OpenHour}TEST</li>
