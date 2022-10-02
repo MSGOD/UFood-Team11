@@ -196,7 +196,7 @@ const Restaurant = () => {
                                     />
                                         <Marker position={[51.505, -0.09]}>
                                         <Popup>
-                                        {item.adress}. <br /> {item.city}.
+                                        TEST. <br /> TEST.
                                         </Popup>
                                     </Marker>
                                 </MapContainer>
@@ -206,13 +206,13 @@ const Restaurant = () => {
                     
                     <div className=''>
                         <ul className="nav-resto">
-                            <li className="header">{item.Title} TEST</li>
-                            <li>Fourchettes : {item.Price} TEST</li>
-                            <li>Type : {item.Type}TEST</li>
-                            <li>Heures d'ouvertures : {item.OpenHour}TEST</li>
-                            <li>Cote moyenne : {item.Cote}TEST</li>
-                            <li>Numéro : {item.Numero}TEST</li>
-                            <li>Adresse : {item.Adress}. {item.City} </li>
+                            <li className="header"> TEST</li>
+                            <li>Fourchettes : TEST</li>
+                            <li>Type : TEST</li>
+                            <li>Heures d'ouvertures : TEST</li>
+                            <li>Cote moyenne : TEST</li>
+                            <li>Numéro : TEST</li>
+                            <li>Adresse :  TEST </li>
                         </ul>
                     </div>
 
