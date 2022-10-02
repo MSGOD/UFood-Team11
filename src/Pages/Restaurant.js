@@ -189,7 +189,7 @@ const Restaurant = () => {
                             </div>
                             
                             <div className="">
-                                <MapContainer center={[51.505, -0.09]} style={{width: '100%',height: '490px'}} zoom={12}scrollWheelZoom={false}>
+                                <MapContainer center={[51.505, -0.09]} style={{width: '100%',height: '470px'}} zoom={12}scrollWheelZoom={false}>
                                     <TileLayer
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
