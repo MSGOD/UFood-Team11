@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchIcon from '../search.svg';
 import CarteResto from '../components/CarteResto';
-import '../App.css';
+import './User.css';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Slider from '@mui/material/Slider';
@@ -78,7 +78,7 @@ const User = () => {
 
                     <ul>
                         <li>
-                            <Link to="/" style={{ margin: 10, textDecoration: 'inherit'}}>
+                            <Link to="/" style={{ margin: 15, textDecoration: 'inherit'}}>
                                 Home
                             </Link>
                         </li>

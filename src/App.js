@@ -5,8 +5,10 @@ import Restaurant from './Pages/Restaurant';
 import {Route, Routes} from "react-router-dom";
 
 function App() {
+    let LoggedIn = false;
+    let UserName = "";
     return <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/User" element={<User />} />
         <Route path="/Restaurant/:id" element={<Restaurant />} />
     </Routes>

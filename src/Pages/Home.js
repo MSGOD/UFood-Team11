@@ -94,6 +94,8 @@ const Home = () => {
         },
     ];
 
+    let LoggedIn = false;
+    let UserName = "greg";
 
 
     return (
@@ -113,17 +115,26 @@ const Home = () => {
 
                     <ul>
                         <li><a href="#" className="active">Home</a></li>
-                        <li>
-                            <Link to="/User" style={{ margin: 10, textDecoration: 'inherit' }}>
-                                Username
-                            </Link>
-                        </li>
+                        {LoggedIn == true ? (
+                            <li>
+                                <Link to="/User" style={{ textDecoration: 'inherit' }}>
+                                    {UserName}
+                                </Link>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link to="/User" style={{ textDecoration: 'inherit' }}>
+                                    Login
+                                </Link>
+                            </li>
+                        )}
+
                     </ul>
                 </div>
             </div>
 
             <div className="Page">
-                <div className="search">
+                <div className="searchH">
                     <input
                         placeholder="Search for a restaurant"
                         value={searchTerm}
