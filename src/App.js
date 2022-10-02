@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './Pages/Home';
 import User from './Pages/User';
+import Restaurant_detail from './Pages/Restaurant_detail';
 import Restaurant from './Pages/Restaurant';
 import Connect from './Pages/Connect';
 import {Route, Routes} from "react-router-dom";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/User" element={<User />} />
         <Route path="/Connect" element={<Connect />} />
         <Route path="/Restaurant/:id" element={<Restaurant />} />
+
     </Routes>
 }
 
