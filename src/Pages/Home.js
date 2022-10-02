@@ -8,13 +8,14 @@ import Slider from '@mui/material/Slider';
 import { MultipleSelectPlaceholder, getFilteredGenres } from '../components/Dropdown';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap, Marker, Popup, getLeafletElement } from 'react-leaflet';
+import {setState, getState} from '../App.js';
 
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure";
 
 
 const Home = () => {
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState(getState()[2]);
     const [restos, setRestos] = useState([]);
     const [value, setValue] = useState([1, 5]);
 
@@ -23,6 +24,7 @@ const Home = () => {
     const searchRestos = async (name) => {
         const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=150`);
         const data = await response.json();
+        setState(getState()[0], getState()[1], name)
 
         setRestos(data.items);
     };
@@ -50,7 +52,7 @@ const Home = () => {
     let uniqueGenres = [];
 
     useEffect(() => {
-        searchRestos("");
+        searchRestos(getState()[2]);
         {
             restos.map((resto) => (
                 resto.genres.map((genre) => (
@@ -94,8 +96,8 @@ const Home = () => {
         },
     ];
 
-    let LoggedIn = false;
-    let UserName = "greg";
+    let LoggedIn = getState()[0];
+    let UserName = getState()[1];
 
 
     return (
@@ -123,7 +125,7 @@ const Home = () => {
                             </li>
                         ) : (
                             <li>
-                                <Link to="/User" style={{ textDecoration: 'inherit' }}>
+                                <Link to="/Connect" style={{ textDecoration: 'inherit' }}>
                                     Login
                                 </Link>
                             </li>

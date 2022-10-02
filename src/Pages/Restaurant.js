@@ -8,7 +8,9 @@ import Slider from '@mui/material/Slider';
 import { MultipleSelectPlaceholder, getFilteredGenres } from '../components/Dropdown';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
+import { setState, getState } from '../App.js';
+import { useNavigate } from 'react-router-dom';
 
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
@@ -16,42 +18,25 @@ const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
 
 const Restaurant = () => {
     const { id } = useParams()
-    const [searchTerm, setSearchTerm] = useState("");
-    const [restos, setRestos] = useState([]);
-    const [value, setValue] = useState([1, 5]);
+    const [searchTerm, setSearchTerm] = useState(getState()[2]);
+    const navigate = useNavigate();
 
 
     const searchRestos = async (name) => {
         const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=155`);
         const data = await response.json();
 
-        setRestos(data.items);
+        setState(getState()[0], getState()[1], name)
+        navigate('/');
     };
 
-
-    let lstGenres = [];
-    let uniqueGenres = [];
-
     useEffect(() => {
-        searchRestos("");
-        {
-            restos.map((resto) => (
-                resto.genres.map((genre) => (
-                    lstGenres.push(genre)
-                ))
-            ))
-        }
-        lstGenres.forEach((c) => {
-            if (!uniqueGenres.includes(c)) {
-                uniqueGenres.push(c);
-            }
-        });
+        
     }, []);
 
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    let LoggedIn = getState()[0];
+    let UserName = getState()[1];
 
     return (
         <div className="app">
@@ -83,11 +68,23 @@ const Restaurant = () => {
 
                     <ul>
                         <li>
-                            <Link to="/" style={{ margin: 10, textDecoration: 'inherit' }}>
+                            <Link to="/" style={{ margin: 15, textDecoration: 'inherit' }}>
                                 Home
                             </Link>
                         </li>
-                        <li><a href="#" className="active">Username</a></li>
+                        {LoggedIn == true ? (
+                            <li>
+                                <Link to="/User" style={{ textDecoration: 'inherit' }}>
+                                    {UserName}
+                                </Link>
+                            </li>
+                        ) : (
+                            <li>
+                                <Link to="/Connect" style={{ textDecoration: 'inherit' }}>
+                                    Login
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>

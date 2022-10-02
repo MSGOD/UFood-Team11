@@ -7,46 +7,40 @@ import 'simplebar/dist/simplebar.min.css';
 import Slider from '@mui/material/Slider';
 import {MultipleSelectPlaceholder, getFilteredGenres} from '../components/Dropdown';
 import {Link} from 'react-router-dom';
+import { setState, getState } from '../App.js';
+import { useNavigate } from 'react-router-dom';
 
 
 const UFOOD_URL = "https://ufoodapi.herokuapp.com/unsecure"
 
 
 const User = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [restos, setRestos] = useState([]);
-    const [value, setValue] = useState([1, 5]);
+    const [searchTerm, setSearchTerm] = useState(getState()[2]);
+    const navigate = useNavigate();
 
 
     const searchRestos = async (name) => {
         const response = await fetch(`${UFOOD_URL}/restaurants?q=${name}&limit=155`);
         const data = await response.json();
 
-        setRestos(data.items);
+        setState(getState()[0], getState()[1], name)
+        navigate('/');
     };
 
 
     let lstGenres = [];
     let uniqueGenres = [];
 
+
+    let LoggedIn = getState()[0];
+    let UserName = getState()[1];
+
     useEffect(() => {
-        searchRestos("");
-        {restos.map((resto) => (
-            resto.genres.map((genre) => (
-                lstGenres.push(genre)
-            ))
-        ))}
-        lstGenres.forEach((c) => {
-            if (!uniqueGenres.includes(c)) {
-                uniqueGenres.push(c);
-            }
-        });
+        
       }, []);
+      
 
       
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return(
         <div className="app">
@@ -82,7 +76,7 @@ const User = () => {
                                 Home
                             </Link>
                         </li>
-                        <li><a href="#" className="active">Username</a></li>
+                        <li><a href="#" className="active">{UserName}</a></li>
                     </ul>
                 </div>
             </nav>
