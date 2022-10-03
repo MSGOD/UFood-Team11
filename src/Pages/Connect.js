@@ -64,13 +64,13 @@ const Connect = () => {
             />
           </div>
 
-          <ul>
-            <li>
+          <ul className='MenuUser'>
+            <li className='MenuUserItem'>
               <Link to="/" style={{ margin: 15, textDecoration: 'inherit' }}>
                 Home
               </Link>
             </li>
-            <li><a href="#" className="active">Login</a></li>
+            <li className='MenuUserItem'><a href="#" className="active">Login</a></li>
           </ul>
         </div>
       </nav>

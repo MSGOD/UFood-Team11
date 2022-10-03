@@ -69,25 +69,32 @@ ul{
     padding-inline-start: 0;
 }
 
-ul li{
-    display: inline-block;
+.MenuUser{
+  list-style: none;
+  position: fixed;
+  right: 10px;
+  padding-inline-start: 0;
 }
 
-ul li a{
-    text-decoration: none;
-    color: #202023;
-    padding: 8px 15px;
-    border-radius: 7px;
-    margin-right: 15px;
-    transition: all .3s ease;
-    box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #222527;
+.MenuUserItem{
+  display: inline-block;
 }
 
-ul li a:hover,
-ul li a.active{
-    color: white;
-    background: #202023;
-    box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #cfd6da;
+.MenuUserItem a{
+  text-decoration: none;
+  color: #202023;
+  padding: 8px 15px;
+  border-radius: 7px;
+  margin-right: 15px;
+  transition: all .3s ease;
+  box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #222527;
+}
+
+.MenuUserItem a:hover,
+.MenuUserItem a.active{
+  color: white;
+  background: #202023;
+  box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #cfd6da;
 }
 
 h1 {
@@ -353,30 +360,34 @@ h1 {
     nav{
         border-bottom: 1px solid black;
     }
-    ul{
-        position: absolute;
-        width: 100%;
-        height: fit-content;
-        background-color: #1db954;
-        left: 0;
-        top: 0;
-        text-align: center;
-        display: none;
-        margin-top: 71px;
-        padding-left: 138px;
-        padding-right: 138px;
-        border-top: 1px solid black;
+    .Title{
+      margin-right: 20px;
+      margin-left: 10px;
     }
+    .MenuUser{
+      position: absolute;
+      width: 100%;
+      height: fit-content;
+      background-color: #1db954;
+      left: 0;
+      top: 0;
+      text-align: center;
+      display: none;
+      margin-top: 71px;
+      padding-left: 138px;
+      padding-right: 138px;
+      border-top: 1px solid black;
+  }
 
-    ul li{
-        display: block;
-        padding: 10px 15px;
-    }
+  .MenuUserItem{
+      display: block;
+      padding: 10px 15px;
+  }
 
-    ul li a{
-        display: block;
-        padding: 10px 0;
-    }
+  .MenuUserItem a{
+      display: block;
+      padding: 10px 0;
+  }
 
     #icon{
         display: block;
@@ -386,6 +397,7 @@ h1 {
 
     .search{
         width: 60%;
+        padding-left: 0.9rem;
     }
 
     #checkbox:checked~ul{

@@ -115,16 +115,16 @@ const Home = () => {
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmLns="http://www.w3.org/2000/svg"><path stroke-Linejoin="round" strokeLinecap="round" stroke-width="2" d="M4 6h12M4 12h16M4 18h16"></path></svg>
                     </label>
 
-                    <ul>
-                        <li><a href="#" className="active">Home</a></li>
+                    <ul className='MenuUser'>
+                        <li className='MenuUserItem'><a href="#" className="active">Home</a></li>
                         {LoggedIn == true ? (
-                            <li>
+                            <li className='MenuUserItem'>
                                 <Link to="/User" style={{ textDecoration: 'inherit' }}>
                                     {UserName}
                                 </Link>
                             </li>
                         ) : (
-                            <li>
+                            <li className='MenuUserItem'>
                                 <Link to="/Connect" style={{ textDecoration: 'inherit' }}>
                                     Login
                                 </Link>

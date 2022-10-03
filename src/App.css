@@ -33,7 +33,7 @@ body {
 
 .details{
   display: flex;
-  justify-content:space-around;
+  justify-content:flex-start;
   flex-wrap: wrap;
   padding: 30px 0;
 }
@@ -46,19 +46,17 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 500px;
+  min-width: 218px;
   width: 20%;
   height: auto;
   min-height: 500px;
-  max-height: 700px;
   padding: 10px 10px;
   margin: 25px;
   box-shadow: 0 0 5px #ccc;
   
-  /* border-radius: 1rem !important; */
-  background: #f9fbfb;
-  background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
-  background: linear-gradient(to right, #0083B0, #00B4DB);
-  color: #ffffff;
+  border-radius: 1rem;
+  background-color: #f9fbfb;
+  color: #0b0909;
   font-size: 0.9rem !important;
   letter-spacing: 0.2em;
 }
@@ -79,14 +77,20 @@ body {
 
 .nav-resto .header {
   /*background-color: #111; */
-  color: white;
+  color: rgb(14, 14, 14);
   font-size: 25px;
 }
 
-.nav-resto li {
-  
-  border-bottom: 1px solid #eee;
+.nav-resto .last {
+  border-bottom: none;
   padding: 20px;
+  letter-spacing: 1px;
+}
+
+.nav-resto li {
+  border-bottom: 1px solid rgb(8, 8, 8);
+  padding: 20px;
+  letter-spacing: 1px;
 }
 
 .button {
@@ -130,6 +134,7 @@ body {
   width: 70%;
   height: auto;
   margin: 15px;
+  align-items: center;
   /*box-shadow: 0 0 5px #ccc; */
 }
 
@@ -194,20 +199,12 @@ background-color: rgb(255, 255, 255);
   margin-top: 15px;
 }
 
-@media (max-width: 900px){
-  .nav-resto {
-    display: none;
-  }
-}
 
 @media (max-width: 500px){
   .thumb{
     height: 50px;
   }
 
-  .thumb img{
-    width: 50px;
-  }
 }
 
 .EnTete {
@@ -236,32 +233,33 @@ background-color: rgb(255, 255, 255);
     align-items: center;
 }
 
-ul{
-    list-style: none;
-    position: fixed;
-    right: 10px;
-    padding-inline-start: 0;
+
+.MenuUser{
+  list-style: none;
+  position: fixed;
+  right: 10px;
+  padding-inline-start: 0;
 }
 
-ul li{
-    display: inline-block;
+.MenuUserItem{
+  display: inline-block;
 }
 
-ul li a{
-    text-decoration: none;
-    color: #202023;
-    padding: 8px 15px;
-    border-radius: 7px;
-    margin-right: 15px;
-    transition: all .3s ease;
-    box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #222527;
+.MenuUserItem a{
+  text-decoration: none;
+  color: #202023;
+  padding: 8px 15px;
+  border-radius: 7px;
+  margin-right: 15px;
+  transition: all .3s ease;
+  box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #222527;
 }
 
-ul li a:hover,
-ul li a.active{
-    color: white;
-    background: #202023;
-    box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #cfd6da;
+.MenuUserItem a:hover,
+.MenuUserItem a.active{
+  color: white;
+  background: #202023;
+  box-shadow: 0px 0px 2px #1c1d1f, 0px 0px 2px #cfd6da;
 }
 
 h1 {
@@ -527,34 +525,63 @@ h1 {
   }
 }*/
 
+@media screen and (max-width :850px){
+  .details{
+    flex-direction: column;
+    display: flex;
+
+  }
+  .nav-resto{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    min-width: 218px;
+    width: 80%;
+    height: auto;
+    min-height: 500px;
+    padding: 10px 10px;
+    margin: 25px;
+    box-shadow: 0 0 5px #ccc;
+    border-radius: 1rem;
+    background-color: #f9fbfb;
+    color: #0b0909;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.2em;
+    position: relative;
+  }
+}
+
 @media screen and (max-width :768px){
     nav{
         border-bottom: 1px solid black;
     }
-    ul{
-        position: absolute;
-        width: 100%;
-        height: fit-content;
-        background-color: #1db954;
-        left: 0;
-        top: 0;
-        text-align: center;
-        display: none;
-        margin-top: 71px;
-        padding-left: 138px;
-        padding-right: 138px;
-        border-top: 1px solid black;
+    .Title{
+      margin-right: 20px;
     }
+    .MenuUser{
+      position: absolute;
+      width: 100%;
+      height: fit-content;
+      background-color: #1db954;
+      left: 0;
+      top: 0;
+      text-align: center;
+      display: none;
+      margin-top: 71px;
+      padding-left: 138px;
+      padding-right: 138px;
+      border-top: 1px solid black;
+  }
 
-    ul li{
-        display: block;
-        padding: 10px 15px;
-    }
+  .MenuUserItem{
+      display: block;
+      padding: 10px 15px;
+  }
 
-    ul li a{
-        display: block;
-        padding: 10px 0;
-    }
+  .MenuUserItem a{
+      display: block;
+      padding: 10px 0;
+  }
 
     #icon{
         display: block;
@@ -589,6 +616,8 @@ h1 {
     .search-result{
         width: 80%;
     }
+
+    
 
 }
 
